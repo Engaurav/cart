@@ -3,12 +3,12 @@ import React from "react";
 class CartItem extends React.Component {
     constructor(){
         super();
-        this.state= {
-            price : 999,
-            title : "Mobile Phone",
-            qty : 2,
-            img: ''
-        }
+        // this.state= {
+        //     price : 999,
+        //     title : "Mobile Phone",
+        //     qty : 2,
+        //     img: ''
+        // }
         // this.testing();
     }
 
@@ -29,39 +29,46 @@ class CartItem extends React.Component {
     //         console.log('state', this.state);
     //     });
     // }
-    increaseQuantity = () => {
-        // this.state.qty += 1;
-        // console.log("This",this);
-        // call set state form 1
-        // this.setState({
-        //     qty : this.state.qty + 1
-        // });
+    // increaseQuantity = () => {
+    //     // this.state.qty += 1;
+    //     // console.log("This",this);
+    //     // call set state form 1
+    //     // this.setState({
+    //     //     qty : this.state.qty + 1
+    //     // });
 
-         // call set state form 2 if require previous state to use again
-         this.setState((prevState) => {
-            return {
-                qty : prevState.qty + 1
-            }
-         });
-    }
-    decreaseQuantity = () => {
-         // call set state  if require previous state to use again
-         if(this.state.qty == 0){
-             return;
-         }
+    //      // call set state form 2 if require previous state to use again
+    //      this.setState((prevState) => {
+    //         return {
+    //             qty : prevState.qty + 1
+    //         }
+    //      });
+    // }
+    // decreaseQuantity = () => {
+    //      // call set state  if require previous state to use again
+    //      if(this.state.qty == 0){
+    //          return;
+    //      }
 
-         //this.setState is Asynchrnous
-         this.setState((prevState) => {
-            return {
-                qty : prevState.qty - 1 
-            }
-         },()   => {
-            // console.log(this.state);
-         });
-        //  console.log(this.state)
-    }
+    //      //this.setState is Asynchrnous
+    //      this.setState((prevState) => {
+    //         return {
+    //             qty : prevState.qty - 1 
+    //         }
+    //      },()   => {
+    //         // console.log(this.state);
+    //      });
+    //     //  console.log(this.state)
+    // }
     render () {
-        const {price,qty,title} = this.state;
+        // console.log(this.props.product)
+        const {price,qty,title} = this.props.product;
+        const {
+            product,
+            onIncreaseQuantity,
+            onDecreaseQuantity,
+            onDeleteProduct    
+            } = this.props;
         return(
             <div className="cart-item">
                 <div className="left-block">
@@ -77,18 +84,19 @@ class CartItem extends React.Component {
                             alt="increase" 
                             className="action-icons" 
                             src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
-                            onClick={this.decreaseQuantity}
+                            onClick={() => onDecreaseQuantity(product)}
                         />
                         <img 
                             alt="decrease" 
                             className="action-icons" 
                             src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-                            onClick={this.increaseQuantity}
+                            onClick={() => onIncreaseQuantity(product)}
                         />
                         <img 
                             alt="delete" 
                             className="action-icons" 
                             src="https://cdn-icons-png.flaticon.com/512/812/812853.png"
+                            onClick={() => onDeleteProduct(product.id)}
                         />
                     </div>
                 </div>
